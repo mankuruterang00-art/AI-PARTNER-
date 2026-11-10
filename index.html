@@ -207,44 +207,76 @@ placeholder="Type your message...">
 </footer>
 
 <script>
+
 let partner = "AI Partner";
 
 function selectPartner(name) {
-partner = name;
+    partner = name;
 
-document.getElementById("chatTitle").innerText =
-"Chat with " + name + " 💬";
+    document.getElementById("chatTitle").innerText = "Chat with " + name;
 
-document.getElementById("messages").innerHTML =
-'<div class="message">Hello! I am ' +
-name + '. Nice to meet you! ❤️</div>';
+    document.getElementById("messages").innerHTML =
+        '<div class="message">Hello! I am ' + escapeHTML(name) + '. Nice to meet you!</div>';
 
-document.getElementById("chatTitle")
-.scrollIntoView({behavior:"smooth"});
+    document.getElementById("chatTitle").scrollIntoView({
+        behavior: "smooth"
+    });
 }
 
-function sendMessage() {
-let input = document.getElementById("userInput");
-let message = input.value.trim();
+async function sendMessage() {
+    let input = document.getElementById("userInput");
+    let message = input.value.trim();
 
-if (!message) return;
+    if (!message) return;
 
-let box = document.getElementById("messages");
+    let box = document.getElementById("messages");
 
-box.innerHTML +=
-'<div class="message"><b>You:</b> ' +
-escapeHTML(message) + '</div>';
+    box.innerHTML +=
+        '<div class="message"><b>You:</b> ' + escapeHTML(message) + '</div>';
 
-box.innerHTML +=
-'<div class="message"><b>' + partner +
-':</b> Hello! I heard you. ❤️</div>';
+    input.value = "";
 
-input.value = "";
-box.scrollIntoView({ behavior: "smooth" });
+    box.innerHTML +=
+        '<div class="message" id="aiReply"><b>' +
+        escapeHTML(partner) + ':</b> Thinking...</div>';
+
+    box.scrollIntoView({ behavior: "smooth" });
+
+    try {
+        const response = await fetch(
+            "https://ai-partner-api.mankuruterang00.workers.dev",
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    message: message
+                })
+            }
+        );
+
+        const data = await response.json();
+
+        if (!response.ok || !data.reply) {
+            throw new Error("AI response unavailable");
+        }
+
+        document.getElementById("aiReply").innerHTML =
+            '<b>' + escapeHTML(partner) + ':</b> ' +
+            escapeHTML(data.reply);
+
+    } catch (error) {
+        document.getElementById("aiReply").innerHTML =
+            '<b>' + escapeHTML(partner) +
+            ':</b> Sorry, AI is temporarily unavailable. Please try again.';
+    }
+
+    box.scrollIntoView({ behavior: "smooth" });
 }
 
 function escapeHTML(text) {
-    return text.replace(/[&<>"']/g, function(char) {
+    return String(text).replace(/[&<>"']/g, function(char) {
         const map = {
             "&": "&amp;",
             "<": "&lt;",
@@ -252,7 +284,11 @@ function escapeHTML(text) {
             '"': "&quot;",
             "'": "&#39;"
         };
+
         return map[char];
     });
 }
+
 </script>
+
+
