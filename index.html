@@ -240,4 +240,19 @@ box.innerHTML +=
 ':</b> Hello! I heard you. ❤️</div>';
 
 input.value = "";
-box
+box.scrollIntoView({ behavior: "smooth" });
+}
+
+function escapeHTML(text) {
+    return text.replace(/[&<>"']/g, function(char) {
+        const map = {
+            "&": "&amp;",
+            "<": "&lt;",
+            ">": "&gt;",
+            '"': "&quot;",
+            "'": "&#39;"
+        };
+        return map[char];
+    });
+}
+</script>
