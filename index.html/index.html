@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Partner</title>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #100d20;
+  color: white;
+}
+
+header {
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #1b1530;
+}
+
+.logo {
+  font-size: 25px;
+  font-weight: bold;
+  color: #e9a7ff;
+}
+
+.hero {
+  text-align: center;
+  padding: 65px 20px;
+}
+
+.hero h1 {
+  font-size: 38px;
+  margin-bottom: 15px;
+}
+
+.hero p {
+  color: #c7bfd8;
+  line-height: 1.6;
+}
+
+button {
+  background: linear-gradient(90deg,#a64dff,#ec65c5);
+  color: white;
+  border: none;
+  padding: 14px 25px;
+  border-radius: 25px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+h2 {
+  text-align: center;
+  margin-top: 30px;
+}
+
+.characters {
+  display: grid;
+  grid-template-columns: repeat(2,1fr);
+  gap: 15px;
+  padding: 20px;
+}
+
+.card {
+  background: #241c3c;
+  padding: 25px 10px;
+  border-radius: 18px;
+  text-align: center;
+}
+
+.avatar {
+  font-size: 55px;
+}
+
+.card p {
+  color: #c7bfd8;
+  font-size: 13px;
+}
+
+footer {
+  text-align: center;
+  padding: 30px;
+  color: #aaa;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo">❤️ AI Partner</div>
+  <span>☰</span>
+</header>
+
+<section class="hero">
+  <h1>Meet Your AI Partner</h1>
+  <p>
+    Your virtual companion is waiting.
+    Discover personalities, make connections
+    and enjoy conversations.
+  </p>
+  <button onclick="document.getElementById('characters').scrollIntoView({behavior:'smooth'})">
+    Explore Characters
+  </button>
+</section>
+
+<h2>Choose Your Partner</h2>
+
+<section class="characters" id="characters">
+
+  <div class="card">
+    <div class="avatar">👩🏻</div>
+    <h3>Sophia</h3>
+    <p>Sweet and caring</p>
+    <button onclick="alert('Chat feature coming soon!')">Chat</button>
+  </div>
+
+  <div class="card">
+    <div class="avatar">👩🏽</div>
+    <h3>Emma</h3>
+    <p>Funny and cheerful</p>
+    <button onclick="alert('Chat feature coming soon!')">Chat</button>
+  </div>
+
+  <div class="card">
+    <div class="avatar">👩🏼</div>
+    <h3>Olivia</h3>
+    <p>Friendly and intelligent</p>
+    <button onclick="alert('Chat feature coming soon!')">Chat</button>
+  </div>
+
+  <div class="card">
+    <div class="avatar">👩🏾</div>
+    <h3>Mia</h3>
+    <p>Adventurous and playful</p>
+    <button onclick="alert('Chat feature coming soon!')">Chat</button>
+  </div>
+
+</section>
+
+<footer>
+  © 2026 AI Partner. All rights reserved.
+</footer>
+
+</body>
+</html>
