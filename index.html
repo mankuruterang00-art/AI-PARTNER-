@@ -314,7 +314,10 @@ async function sendMessage() {
 
     box.appendChild(replyElement);
 
-    box.scrollIntoView({ behavior: "smooth" });
+    box.scrollTo({
+    top: box.scrollHeight,
+    behavior: "smooth"
+});
 
     try {
         const response = await fetch(
@@ -343,8 +346,10 @@ async function sendMessage() {
             currentPartner + ": Sorry, AI is temporarily unavailable.";
     }
 
-    box.scrollIntoView({ behavior: "smooth" });
-}
+    box.scrollTo({
+    top: box.scrollHeight,
+    behavior: "smooth"
+});
 
 function escapeHTML(text) {
     return String(text).replace(/[&<>"']/g, function(char) {
