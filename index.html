@@ -127,6 +127,23 @@ text-align: center;
 padding: 25px;
 color: #aaa;
 }
+    html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+}
+
+#messages {
+    overflow-y: auto;
+    scroll-behavior: smooth;
+    flex: 1;
+    min-height: 0;
+}
+
+.message {
+    overflow-wrap: anywhere;
+}
 </style>
 </head>
 
