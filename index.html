@@ -230,21 +230,30 @@ async function sendMessage() {
     if (!message) return;
 
     let box = document.getElementById("messages");
+    let currentPartner = partner;
 
-    box.innerHTML +=
-        '<div class="message"><b>You:</b> ' + escapeHTML(message) + '</div>';
+    let userMessage = document.createElement("div");
+    userMessage.className = "message";
+
+    let userLabel = document.createElement("b");
+    userLabel.textContent = "You: ";
+
+    userMessage.appendChild(userLabel);
+    userMessage.appendChild(document.createTextNode(message));
+    box.appendChild(userMessage);
 
     input.value = "";
 
-    const currentPartner = partner;
+    let replyElement = document.createElement("div");
+    replyElement.className = "message";
 
-const replyElement = document.createElement("div");
-replyElement.className = "message";
+    let replyLabel = document.createElement("b");
+    replyLabel.textContent = currentPartner + ": ";
 
-replyElement.innerHTML =
-    '<b>' + escapeHTML(currentPartner) + ':</b> Thinking...';
+    replyElement.appendChild(replyLabel);
+    replyElement.appendChild(document.createTextNode("Thinking..."));
 
-box.appendChild(replyElement);
+    box.appendChild(replyElement);
 
     box.scrollIntoView({ behavior: "smooth" });
 
@@ -268,14 +277,11 @@ box.appendChild(replyElement);
             throw new Error("AI response unavailable");
         }
 
-        replyElement.innerHTML =
-    '<b>' + escapeHTML(currentPartner) + ':</b> ' +
-    escapeHTML(data.reply);
+        replyElement.textContent = currentPartner + ": " + data.reply;
 
     } catch (error) {
-    replyElement.innerHTML =
-        '<b>' + escapeHTML(currentPartner) +
-        ':</b> Sorry, AI is temporarily unavailable. Please try again.';
+        replyElement.textContent =
+            currentPartner + ": Sorry, AI is temporarily unavailable.";
     }
 
     box.scrollIntoView({ behavior: "smooth" });
