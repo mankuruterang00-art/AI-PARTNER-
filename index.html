@@ -236,9 +236,15 @@ async function sendMessage() {
 
     input.value = "";
 
-    box.innerHTML +=
-        '<div class="message" id="aiReply"><b>' +
-        escapeHTML(partner) + ':</b> Thinking...</div>';
+    const currentPartner = partner;
+
+const replyElement = document.createElement("div");
+replyElement.className = "message";
+
+replyElement.innerHTML =
+    '<b>' + escapeHTML(currentPartner) + ':</b> Thinking...';
+
+box.appendChild(replyElement);
 
     box.scrollIntoView({ behavior: "smooth" });
 
@@ -262,14 +268,14 @@ async function sendMessage() {
             throw new Error("AI response unavailable");
         }
 
-        document.getElementById("aiReply").innerHTML =
-            '<b>' + escapeHTML(partner) + ':</b> ' +
-            escapeHTML(data.reply);
+        replyElement.innerHTML =
+    '<b>' + escapeHTML(currentPartner) + ':</b> ' +
+    escapeHTML(data.reply);
 
     } catch (error) {
-        document.getElementById("aiReply").innerHTML =
-            '<b>' + escapeHTML(partner) +
-            ':</b> Sorry, AI is temporarily unavailable. Please try again.';
+    replyElement.innerHTML =
+        '<b>' + escapeHTML(currentPartner) +
+        ':</b> Sorry, AI is temporarily unavailable. Please try again.';
     }
 
     box.scrollIntoView({ behavior: "smooth" });
